@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Route, Switch, withRouter, Link } from 'react-router-dom';
+import RuleList from './components/ruleList';
+import CreateRule from './components/createRule';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+/**
+ * @name App
+ * @description The main component of the app.
+ * It contains two parts Header, Route part
+ */
+
+function App(props) {
+  const goToCreate = () => {
+    localStorage.removeItem('rule');
+  }
+
+  return (<div>
+    <header className="App-header">
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/create" onClick={goToCreate}>Create Rule</Link>
+        </nav>
       </header>
+    <div>
+      <Switch>
+        <Route exact path="/" component={RuleList} />
+        <Route path="/create/" component={CreateRule} />
+      </Switch>
     </div>
+  </div>
   );
 }
 
-export default App;
+export default withRouter(App);
