@@ -1,7 +1,7 @@
-const BASE_API_URL = 'http://stubonweb.herokuapp.com/';
+const BASE_API_URL = 'https://run.mocky.io/v3/066dd5f2-28fd-440b-95e9-c2a1ba349574';
 
 export const getRulesList = () => {
-    const url = `${BASE_API_URL}b233b07dff6f`;
+    const url = `${BASE_API_URL}`;
     return fetch(url, {
         headers: {
             'Accept': 'application/json'
@@ -10,7 +10,7 @@ export const getRulesList = () => {
 }
 
 export const createPostRule = (obj) => {
-    const url = `${BASE_API_URL}b233b07dff6f`;
+    const url = `${BASE_API_URL}`;
     return fetch(url, {
         method: 'POST',
         body: JSON.stringify(obj),
@@ -28,7 +28,7 @@ export const createPostRule = (obj) => {
 }
 
 export const updatePutRule = (obj) => {
-    const url = `${BASE_API_URL}b233b07dff6f`;
+    const url = `${BASE_API_URL}`;
     return fetch(url, {
         method: 'PUT',
         body: JSON.stringify(obj),

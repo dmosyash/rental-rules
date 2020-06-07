@@ -1,68 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Rental Rules
+This is a web application for viewing, creating and editing rental rules.
 
-## Available Scripts
+[Click here to see the live App](https://rental-rules.netlify.app/)
 
-In the project directory, you can run:
+This application is developed in Reactjs.
+Jsons are provided to fetch the data from API.
 
-### `yarn start`
+## Structure of the App
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The App is developed in ReactJs. It is created with the help of **React cli**. No framework is used for CSS and modeling purpose. Home page of this app is divided into 2 parts
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Header
+- Main Part
 
-### `yarn test`
+### Header
+It always stays on top of every page, this component is called in App component, so need to write only once in the whole app. Header has the app menu(Navbar).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### Main Part
+As the name suggests it is the main body of the App. This App has 2 main pages.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- List of existing rules
+- Create/Edit a rule
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### List of existing rules
+This page having the list of all existing rental rules. Those rules are coming from an API. That API provide JSON object of the rules and then the component do some operation to make that JSON readable.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Create/Edit a rule
+This is a smart comopnent, it is used to create a whole rule which consists of one or many conditions. For every condition there is a component which has 3 inputs and return data as user changes it.
 
-### `yarn eject`
+### Data Structure
+That is the trickiest part of the assignment. To make the application scalable and flexible, I have come up with this data structure to create a rule.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Every rule is an array of array. Every element(which is an array) of the upper array is connected to each other with OR condition and every element(which is a JSON object) of the lower array is connected to each other with AND condition.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For ex:-
+Rule: Amount > $5000 OR Item = TV
+Data representation:- 
+    [
+        [
+            {
+                fieldName: 'Amount',
+                operator: '>',
+                value: '5000'
+            }
+        ],
+        [
+            {
+                fieldName: 'Item',
+                operator: '=',
+                value: 'TV'
+            }
+        ]
+    ]
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Rule: (Amount > $5000 AND Age > 30) OR Item = TV
+Data representation:- 
+    [
+        [
+            {
+                fieldName: 'Amount',
+                operator: '>',
+                value: '5000'
+            },
+            {
+                fieldName: 'Age',
+                operator: '>',
+                value: '30'
+            }
+        ],
+        [
+            {
+                fieldName: 'Item',
+                operator: '=',
+                value: 'TV'
+            }
+        ]
+    ]
