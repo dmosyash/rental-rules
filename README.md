@@ -29,7 +29,7 @@ This page having the list of all existing rental rules. Those rules are coming f
 #### Create/Edit a rule
 This is a smart comopnent, it is used to create a whole rule which consists of one or many conditions. For every condition there is a component which has 3 inputs and return data as user changes it.
 
-### Data Structure
+#### Data Structure
 That is the trickiest part of the assignment. To make the application scalable and flexible, I have come up with this data structure to create a rule.
 
 Every rule is an array of array. Every element(which is an array) of the upper array is connected to each other with OR condition and every element(which is a JSON object) of the lower array is connected to each other with AND condition.
